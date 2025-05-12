@@ -1,0 +1,193 @@
+
+======= Shell Lab Automated Tests =======
+
+>>> Test 01: trace01.txt
+  [0;32m✔ PASS[0m
+
+>>> Test 02: trace02.txt
+  [0;32m✔ PASS[0m
+
+>>> Test 03: trace03.txt
+  [0;32m✔ PASS[0m
+
+>>> Test 04: trace04.txt
+  [0;32m✔ PASS[0m
+
+>>> Test 05: trace05.txt
+  [0;32m✔ PASS[0m
+
+>>> Test 06: trace06.txt
+  [0;32m✔ PASS[0m
+
+>>> Test 07: trace07.txt
+  [0;32m✔ PASS[0m
+
+>>> Test 08: trace08.txt
+  [0;32m✔ PASS[0m
+
+>>> Test 09: trace09.txt
+  [0;32m✔ PASS[0m
+
+>>> Test 10: trace10.txt
+  [0;32m✔ PASS[0m
+
+>>> Test 11: trace11.txt
+  [0;33m✗ WAITING TO CHECK[0m
+--- tsh output ---
+#
+# trace11.txt - Forward SIGINT to every process in foreground process group
+#
+tsh> ./mysplit 4
+Job [JID] (PID) terminated by signal 2
+tsh> /bin/ps a
+   PID TTY      STAT   TIME COMMAND
+  2126 pts/0    Ss     0:00 -bash
+  8261 pts/0    S+     0:00 bash test.sh
+  8262 pts/0    S+     0:00 bash test.sh
+  8264 pts/0    S+     0:00 tee output.txt
+  8458 pts/0    S+     0:00 bash test.sh
+  8459 pts/0    S+     0:00 /usr/bin/perl ./sdriver.pl -t trace11.txt -s ./tsh -a -p
+  8460 pts/0    S+     0:00 sed -E s/\[[0-9]+\]/[JID]/g; s/\([0-9]+\)/\(PID\)/g
+  8461 pts/0    S+     0:00 ./tsh -p
+  8467 pts/0    R      0:00 /bin/ps a
+--- tshref output ---
+#
+# trace11.txt - Forward SIGINT to every process in foreground process group
+#
+tsh> ./mysplit 4
+Job [JID] (PID) terminated by signal 2
+tsh> /bin/ps a
+   PID TTY      STAT   TIME COMMAND
+  2126 pts/0    Ss     0:00 -bash
+  8261 pts/0    S+     0:00 bash test.sh
+  8262 pts/0    S+     0:00 bash test.sh
+  8264 pts/0    S+     0:00 tee output.txt
+  8468 pts/0    S+     0:00 bash test.sh
+  8469 pts/0    S+     0:00 /usr/bin/perl ./sdriver.pl -t trace11.txt -s ./tshref -a -p
+  8470 pts/0    S+     0:00 sed -E s/\[[0-9]+\]/[JID]/g; s/\([0-9]+\)/\(PID\)/g
+  8472 pts/0    S+     0:00 ./tshref -p
+  8477 pts/0    R      0:00 /bin/ps a
+
+>>> Test 12: trace12.txt
+  [0;33m✗ WAITING TO CHECK[0m
+--- tsh output ---
+#
+# trace12.txt - Forward SIGTSTP to every process in foreground process group
+#
+tsh> ./mysplit 4
+Job [JID] (PID) stopped by signal 20
+tsh> jobs
+[JID] (PID) Stopped ./mysplit 4 
+tsh> /bin/ps a
+   PID TTY      STAT   TIME COMMAND
+  2126 pts/0    Ss     0:00 -bash
+  8261 pts/0    S+     0:00 bash test.sh
+  8262 pts/0    S+     0:00 bash test.sh
+  8264 pts/0    S+     0:00 tee output.txt
+  8481 pts/0    S+     0:00 bash test.sh
+  8482 pts/0    S+     0:00 /usr/bin/perl ./sdriver.pl -t trace12.txt -s ./tsh -a -p
+  8483 pts/0    S+     0:00 sed -E s/\[[0-9]+\]/[JID]/g; s/\([0-9]+\)/\(PID\)/g
+  8484 pts/0    S+     0:00 ./tsh -p
+  8486 pts/0    T      0:00 ./mysplit 4
+  8487 pts/0    T      0:00 ./mysplit 4
+  8490 pts/0    R      0:00 /bin/ps a
+--- tshref output ---
+#
+# trace12.txt - Forward SIGTSTP to every process in foreground process group
+#
+tsh> ./mysplit 4
+Job [JID] (PID) stopped by signal 20
+tsh> jobs
+[JID] (PID) Stopped ./mysplit 4 
+tsh> /bin/ps a
+   PID TTY      STAT   TIME COMMAND
+  2126 pts/0    Ss     0:00 -bash
+  8261 pts/0    S+     0:00 bash test.sh
+  8262 pts/0    S+     0:00 bash test.sh
+  8264 pts/0    S+     0:00 tee output.txt
+  8491 pts/0    S+     0:00 bash test.sh
+  8492 pts/0    S+     0:00 /usr/bin/perl ./sdriver.pl -t trace12.txt -s ./tshref -a -p
+  8493 pts/0    S+     0:00 sed -E s/\[[0-9]+\]/[JID]/g; s/\([0-9]+\)/\(PID\)/g
+  8494 pts/0    S+     0:00 ./tshref -p
+  8496 pts/0    T      0:00 ./mysplit 4
+  8497 pts/0    T      0:00 ./mysplit 4
+  8502 pts/0    R      0:00 /bin/ps a
+
+>>> Test 13: trace13.txt
+  [0;33m✗ WAITING TO CHECK[0m
+--- tsh output ---
+#
+# trace13.txt - Restart every stopped process in process group
+#
+tsh> ./mysplit 4
+Job [JID] (PID) stopped by signal 20
+tsh> jobs
+[JID] (PID) Stopped ./mysplit 4 
+tsh> /bin/ps a
+   PID TTY      STAT   TIME COMMAND
+  2126 pts/0    Ss     0:00 -bash
+  8261 pts/0    S+     0:00 bash test.sh
+  8262 pts/0    S+     0:00 bash test.sh
+  8264 pts/0    S+     0:00 tee output.txt
+  8506 pts/0    S+     0:00 bash test.sh
+  8507 pts/0    S+     0:00 /usr/bin/perl ./sdriver.pl -t trace13.txt -s ./tsh -a -p
+  8508 pts/0    S+     0:00 sed -E s/\[[0-9]+\]/[JID]/g; s/\([0-9]+\)/\(PID\)/g
+  8509 pts/0    S+     0:00 ./tsh -p
+  8511 pts/0    T      0:00 ./mysplit 4
+  8512 pts/0    T      0:00 ./mysplit 4
+  8515 pts/0    R      0:00 /bin/ps a
+tsh> fg %1
+tsh> /bin/ps a
+   PID TTY      STAT   TIME COMMAND
+  2126 pts/0    Ss     0:00 -bash
+  8261 pts/0    S+     0:00 bash test.sh
+  8262 pts/0    S+     0:00 bash test.sh
+  8264 pts/0    S+     0:00 tee output.txt
+  8506 pts/0    S+     0:00 bash test.sh
+  8507 pts/0    S+     0:00 /usr/bin/perl ./sdriver.pl -t trace13.txt -s ./tsh -a -p
+  8508 pts/0    S+     0:00 sed -E s/\[[0-9]+\]/[JID]/g; s/\([0-9]+\)/\(PID\)/g
+  8509 pts/0    S+     0:00 ./tsh -p
+  8520 pts/0    R      0:00 /bin/ps a
+--- tshref output ---
+#
+# trace13.txt - Restart every stopped process in process group
+#
+tsh> ./mysplit 4
+Job [JID] (PID) stopped by signal 20
+tsh> jobs
+[JID] (PID) Stopped ./mysplit 4 
+tsh> /bin/ps a
+   PID TTY      STAT   TIME COMMAND
+  2126 pts/0    Ss     0:00 -bash
+  8261 pts/0    S+     0:00 bash test.sh
+  8262 pts/0    S+     0:00 bash test.sh
+  8264 pts/0    S+     0:00 tee output.txt
+  8521 pts/0    S+     0:00 bash test.sh
+  8522 pts/0    S+     0:00 /usr/bin/perl ./sdriver.pl -t trace13.txt -s ./tshref -a -p
+  8523 pts/0    S+     0:00 sed -E s/\[[0-9]+\]/[JID]/g; s/\([0-9]+\)/\(PID\)/g
+  8524 pts/0    S+     0:00 ./tshref -p
+  8526 pts/0    T      0:00 ./mysplit 4
+  8527 pts/0    T      0:00 ./mysplit 4
+  8530 pts/0    R      0:00 /bin/ps a
+tsh> fg %1
+tsh> /bin/ps a
+   PID TTY      STAT   TIME COMMAND
+  2126 pts/0    Ss     0:00 -bash
+  8261 pts/0    S+     0:00 bash test.sh
+  8262 pts/0    S+     0:00 bash test.sh
+  8264 pts/0    S+     0:00 tee output.txt
+  8521 pts/0    S+     0:00 bash test.sh
+  8522 pts/0    S+     0:00 /usr/bin/perl ./sdriver.pl -t trace13.txt -s ./tshref -a -p
+  8523 pts/0    S+     0:00 sed -E s/\[[0-9]+\]/[JID]/g; s/\([0-9]+\)/\(PID\)/g
+  8524 pts/0    S+     0:00 ./tshref -p
+  8533 pts/0    R      0:00 /bin/ps a
+
+>>> Test 14: trace14.txt
+  [0;32m✔ PASS[0m
+
+>>> Test 15: trace15.txt
+  [0;32m✔ PASS[0m
+
+>>> Test 16: trace16.txt
+  [0;32m✔ PASS[0m
+

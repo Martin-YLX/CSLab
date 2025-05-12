@@ -1,0 +1,41 @@
+./sdriver.pl -t trace12.txt -s ./tsh -a "-p"
+#
+# trace12.txt - Forward SIGTSTP to every process in foreground process group
+#
+tsh> ./mysplit 4
+Job [1] (9143) stopped by signal 20
+tsh> jobs
+[1] (9143) Stopped ./mysplit 4 
+tsh> /bin/ps a
+   PID TTY      STAT   TIME COMMAND
+  2126 pts/0    Ss+    0:00 -bash
+  8908 pts/1    Ss     0:00 -bash
+  8953 pts/1    S+     0:00 bash save.sh
+  9138 pts/1    S+     0:00 make test12
+  9139 pts/1    S+     0:00 /bin/sh -c ./sdriver.pl -t trace12.txt -s ./tsh -a "-p"
+  9140 pts/1    S+     0:00 /usr/bin/perl ./sdriver.pl -t trace12.txt -s ./tsh -a -p
+  9141 pts/1    S+     0:00 ./tsh -p
+  9143 pts/1    T      0:00 ./mysplit 4
+  9144 pts/1    T      0:00 ./mysplit 4
+  9149 pts/1    R      0:00 /bin/ps a
+
+./sdriver.pl -t trace12.txt -s ./tshref -a "-p"
+#
+# trace12.txt - Forward SIGTSTP to every process in foreground process group
+#
+tsh> ./mysplit 4
+Job [1] (9155) stopped by signal 20
+tsh> jobs
+[1] (9155) Stopped ./mysplit 4 
+tsh> /bin/ps a
+   PID TTY      STAT   TIME COMMAND
+  2126 pts/0    Ss+    0:00 -bash
+  8908 pts/1    Ss     0:00 -bash
+  8953 pts/1    S+     0:00 bash save.sh
+  9150 pts/1    S+     0:00 make rtest12
+  9151 pts/1    S+     0:00 /bin/sh -c ./sdriver.pl -t trace12.txt -s ./tshref -a "-p"
+  9152 pts/1    S+     0:00 /usr/bin/perl ./sdriver.pl -t trace12.txt -s ./tshref -a -p
+  9153 pts/1    S+     0:00 ./tshref -p
+  9155 pts/1    T      0:00 ./mysplit 4
+  9156 pts/1    T      0:00 ./mysplit 4
+  9159 pts/1    R      0:00 /bin/ps a
