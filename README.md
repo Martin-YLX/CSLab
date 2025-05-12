@@ -2,7 +2,7 @@
 - **Completion Time**: 2025
 - **Course**: Computer Systems
 - **Software Used**: LLDB, Clang, Make, Visual Studio Code
-- **Subprojects**: miniCC, BombLab
+- **Subprojects**: miniCC, BombLab, shellLab
 - **Partially Based On**: CS:APP (Computer Systems: A Programmer’s Perspective)
 
 ---
